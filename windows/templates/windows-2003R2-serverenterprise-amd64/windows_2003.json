@@ -2,29 +2,24 @@
     "builders": [
         {
             "type": "virtualbox-iso",
-            "iso_url": "../../iso/en_windows_server_2008_datacenter_enterprise_standard_without_hyperv_x64_dvd_x14-27010.iso",
+            "iso_url": "../../iso/en_win_srv_2003_r2_enterprise_x64_cd1.iso",
             "iso_checksum_type": "md5",
-            "iso_checksum": "492a6bba4a6175b9722dbc6abfd92ba3",
+            "iso_checksum": "9674ef3b93d2522eb997bbb32aac288b",
             "headless": false,
             "boot_wait": "2m",
             "ssh_username": "vagrant",
             "ssh_password": "vagrant",
             "ssh_wait_timeout": "2h",
             "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-            "guest_os_type": "Windows2008_64",
+            "guest_os_type": "Windows2003_64",
             "disk_size": 61440,
             "floppy_files": [
-                "./Autounattend.xml",
-                "../../scripts/runonce.bat",
-                "../../scripts/ps.bat",
-                "../../scripts/powershell2.ps1",
-                "../../scripts/win-updates.ps1",
-                "../../scripts/openssh.ps1",
-                "../../scripts/oracle-cert.cer"
+              "../../scripts/oracle-cert.cer"
             ],
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "2048"],
-                ["modifyvm", "{{.Name}}", "--cpus", "2"]
+                ["modifyvm", "{{.Name}}", "--cpus", "2"],
+                ["storageattach", "{{.Name}}", "--storagectl", "Floppy Controller", "--port", "0", "--device", "0", "--type", "fdd", "--medium", "../../scripts/floppy/floppy01.img"]
             ]
         }
     ],
@@ -46,8 +41,8 @@
         {
             "type": "vagrant",
             "keep_input_artifact": false,
-            "output": "windows-2008-serverstandard-amd64_{{.Provider}}.box",
-            "vagrantfile_template": "vagrantfile-windows_2008.template"
+            "output": "windows_2003R2-serverenterprise-amd64_{{.Provider}}.box",
+            "vagrantfile_template": "vagrantfile-windows_2003.template"
         }
     ]
 }

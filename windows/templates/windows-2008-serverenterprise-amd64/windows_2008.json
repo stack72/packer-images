@@ -47,7 +47,7 @@
         {
             "type": "vagrant",
             "keep_input_artifact": false,
-            "output": "windows-2008-serverstandard-amd64_{{.Provider}}.box",
+            "output": "windows-2008-serverenterprise-amd64_{{.Provider}}.box",
             "vagrantfile_template": "vagrantfile-windows_2008.template"
         }
     ]

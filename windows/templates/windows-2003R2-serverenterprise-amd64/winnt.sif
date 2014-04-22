@@ -18,17 +18,17 @@
     AutoConfirm=1
 
 [GuiUnattended]
-    AdminPassword="somePassword"
+    AdminPassword="vagrant"
     EncryptedAdminPassword=No
     AutoLogon=Yes
-    AutoLogonCount=1
+    AutoLogonCount=4
     OEMSkipRegional=1
     TimeZone=110
     OemSkipWelcome=1
 
 [UserData]
     ProductKey=JG78J-M8KP4-G3CQW-2XFMR-28JPD
-    FullName="John Doe"
+    FullName="Vagrant"
     OrgName=""
     ComputerName=*
 

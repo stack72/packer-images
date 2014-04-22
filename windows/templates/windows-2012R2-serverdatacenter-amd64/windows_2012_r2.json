@@ -15,9 +15,11 @@
             "disk_size": 61440,
             "floppy_files": [
                 "./Autounattend.xml",
-                "../../scripts/win-updates.ps1",
-                "../../scripts/openssh.ps1",
-                "../../scripts/oracle-cert.cer"
+                "../../scripts/install-cygwin-sshd.bat",
+                "../../scripts/enable-admin.bat",
+                "../../scripts/vagrant-ssh.bat",
+                "../../scripts/oracle-cert.cer",
+                "../../scripts/vagrant.pub"
             ],
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "2048"],

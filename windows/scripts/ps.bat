@@ -6,6 +6,13 @@ IF "%1%"=="win2008_64" (
      timeout 10 > null
      C:\Windows\System32\wusa.exe C:\Windows6.0-KB968930-x64.msu /quiet /norestart
    )
+) ELSE IF "%1%"=="win2008" (
+  timeout 20 > null
+  IF NOT EXIST "C:\Windows6.0-KB968930-x86.msu" (
+    C:\Windows\System32\cscript.exe a:\downloadFile.vbs "http://download.microsoft.com/download/F/9/E/F9EF6ACB-2BA8-4845-9C10-85FC4A69B207/Windows6.0-KB968930-x86.msu" "C:\Windows6.0-KB968930-x86.msu"
+    timeout 10 > null
+    C:\Windows\System32\wusa.exe C:\Windows6.0-KB968930-x86.msu /quiet /norestart
+  )
 )  ELSE IF "%1%"=="win2003_64" (
 
    IF NOT EXIST "C:\WindowsServer2003.WindowsXP-KB914961-SP2-x64-ENU.exe" (
@@ -34,7 +41,7 @@ IF "%1%"=="win2008_64" (
      ECHO "Installing Powershell 2.0"
      C:\WindowsServer2003-KB968930-x64-ENG.exe /quiet /norestart
 
-     a:\regedit.bat
+     a:\regedit.bat win2003_64
 
      timeout 20 > null
      shutdown /r /t 00

@@ -13,7 +13,7 @@
             "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
             "guest_os_type": "Windows2012_64",
             "guest_additions_path": "/cygdrive/c/Users/vagrant/VBoxGuestAdditions.iso",
-            "disk_size": 61440,
+            "disk_size": 92160,
             "floppy_files": [
                 "./Autounattend.xml",
                 "../../scripts/install-cygwin-sshd.bat",
@@ -45,7 +45,7 @@
         {
             "type": "vagrant",
             "keep_input_artifact": false,
-            "output": "windows-2012-serverstandard-amd64_{{.Provider}}.box",
+            "output": "windows-2012-serverfoundation-amd64_{{.Provider}}.box",
             "vagrantfile_template": "vagrantfile-windows_2012.template"
         }
     ]

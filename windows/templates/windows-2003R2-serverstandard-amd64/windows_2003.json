@@ -2,9 +2,9 @@
     "builders": [
         {
             "type": "virtualbox-iso",
-            "iso_url": "../../iso/en_win_srv_2003_r2_enterprise_x64_cd1.iso",
+            "iso_url": "../../iso/en_win_srv_2003_r2_standard_x64_cd1.iso",
             "iso_checksum_type": "md5",
-            "iso_checksum": "9674ef3b93d2522eb997bbb32aac288b",
+            "iso_checksum": "e7c31ef556396da7e2aa9a8f3c2ca7c3",
             "headless": false,
             "boot_wait": "2m",
             "ssh_username": "vagrant",
@@ -39,7 +39,7 @@
         {
             "type": "vagrant",
             "keep_input_artifact": false,
-            "output": "windows_2003R2-serverenterprise-amd64_{{.Provider}}.box",
+            "output": "windows_2003R2-serverstandard-amd64_{{.Provider}}.box",
             "vagrantfile_template": "vagrantfile-windows_2003.template"
         }
     ]

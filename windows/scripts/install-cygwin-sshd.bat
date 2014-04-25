@@ -12,8 +12,6 @@ IF "%1%"=="win2003_64" (
   cmd /c bitsadmin /transfer CygwinSetupExe /download /priority normal %URL% %SystemDrive%\cygwin\cygwin-setup.exe
 )
 
-
-
 REM goto a temp directory
 cd /D %SystemDrive%\windows\temp
 
@@ -80,9 +78,14 @@ cmd /c %SystemDrive%\cygwin\bin\bash -c 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/
 
 %SystemDrive%\cygwin\bin\bash -c 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin /usr/bin/ssh-host-config -y -c "ntsecbinmode mintty" -w "abc&&123!!" '
 
-cmd /c if exist %Systemroot%\system32\netsh.exe netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="%SystemDrive%\cygwin\usr\sbin\sshd.exe" enable=yes
+IF "%1%"=="win2003_64" (
+  cmd /c if exist %Systemroot%\system32\netsh.exe netsh firewall add allowedprogram name="sshd" mode=ENABLE  program="%SystemDrive%\cygwin\usr\sbin\sshd.exe"
+  cmd /c if exist %Systemroot%\system32\netsh.exe netsh firewall add portopening name="ssh" mode=ENABLE protocol=TCP port=22
+) ELSE (
+  cmd /c if exist %Systemroot%\system32\netsh.exe netsh advfirewall firewall add rule name="SSHD" dir=in action=allow program="%SystemDrive%\cygwin\usr\sbin\sshd.exe" enable=yes
+  cmd /c if exist %Systemroot%\system32\netsh.exe netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22
+)
 
-cmd /c if exist %Systemroot%\system32\netsh.exe netsh advfirewall firewall add rule name="ssh" dir=in action=allow protocol=TCP localport=22
 
 %SystemDrive%\cygwin\bin\bash -c 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin ln -s "$(/bin/dirname $(/bin/cygpath -D))" /home/$USERNAME'
 
@@ -95,4 +98,4 @@ REM Fix corrupt recycle bin
 REM http://www.winhelponline.com/blog/fix-corrupted-recycle-bin-windows-7-vista/
 cmd /c rd /s /q %SystemDrive%\$Recycle.bin
 
-cmd /c A:\vagrant-ssh.bat
+cmd /c A:\vagrant-ssh.bat %1%
